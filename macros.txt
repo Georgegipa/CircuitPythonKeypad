@@ -1,0 +1,8 @@
+CTRL+C
+CTRL+V
+CTRL+Z
+CTRL+Y
+ALT+SHIFT+A
+CTRL+SHIFT+P
+W,calc
+W,msedge
