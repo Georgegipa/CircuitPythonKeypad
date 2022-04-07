@@ -4,6 +4,7 @@ import digitalio
 import storage
 import keypad
 from macrosengine import macroengine
+import gc
 
 led = digitalio.DigitalInOut(board.LED)
 led.direction = digitalio.Direction.OUTPUT
@@ -13,6 +14,14 @@ km = keypad.KeyMatrix(
     column_pins=(board.GP11, board.GP10, board.GP9, board.GP8),
     columns_to_anodes=False,
 )
+
+def getRamUsage():
+    gc.collect()
+    mem = gc.mem_free()
+    print( "Available memory: {} bytes".format(mem))
+    mem = (256000 - mem) / 256000 * 100
+    print("RAM Used:{:.2f}%".format(mem))
+   
 
 def running_led(speed):
     led.value = True
@@ -50,8 +59,11 @@ print("Profiles:"+str(profiles))
 
 def keyToMacro(key_pressed: int):
     x = (current_profile * km.key_count) + key_pressed
+    print("Pressed:"+str(x))
     if(key_pressed <= macros_sum - 1):
-        macros.parseMacro(parse_line(x))
+        macros.parseMacro(parse_line(x),True)
+    else:
+        getRamUsage()
 
 while True:
     event = km.events.get()

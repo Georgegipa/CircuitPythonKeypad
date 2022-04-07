@@ -2,7 +2,7 @@ CTRL+C
 CTRL+V
 CTRL+Z
 CTRL+Y
-ALT+SHIFT+A
-CTRL+SHIFT+P
-W,calc
-W,msedge
+VOL_U
+VOL_D
+R,calc
+R,msedge
